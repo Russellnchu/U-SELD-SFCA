@@ -25,8 +25,6 @@ class U_SELD(nn.Module):
         x = output.view(output.shape[0], output.shape[1], -1).contiguous()
         (x, _) = self.bigru(x)
         x = x[:, :, x.shape[-1]//2:] * x[:, :, :x.shape[-1]//2]
-        # x = x[:, :, x.shape[-1]//2:] + x[:, :, :x.shape[-1]//2]
-        # x = torch.tanh(self.linear1(x))
         x = torch.tanh(self.linear(x))
         return x
 
